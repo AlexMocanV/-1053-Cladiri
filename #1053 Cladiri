@@ -1,0 +1,71 @@
+#include <iostream>
+
+#include <fstream>
+using namespace std;
+ifstream fin("cladiri.in");
+ofstream fout("cladiri.out");
+long long int n,i,uca,uco,pal=0,a,maxinr=-1,maxi=-1,nr=0,uc,ogl=0,magic;
+int main()
+{
+
+    fin>>n;
+    for(i=1;i<=n;i++)
+    {
+        fin>>a;
+        int copie=a;
+        maxi=-1;
+        ogl=0;
+        while(copie>0)
+        {
+          uc=copie%10;
+          if(maxi<uc)
+          {
+              maxi=uc;
+          }
+          copie=copie/10;
+          ogl=ogl*10+uc;
+        }
+        if(maxinr==maxi)
+        {
+           nr++;
+        }
+        if(maxinr<maxi)
+        {
+            maxinr=maxi;
+            nr=1;
+
+        }
+
+        if(ogl==a)
+        {
+            pal++;
+        }
+        else
+        {
+            copie=a;
+            while(ogl!=copie)
+            {
+                uco=ogl%10;
+                ogl=ogl/10;
+                uca=copie%10;
+                copie=copie/10;
+                if(uca>uco)
+            {
+                magic+=uca-uco;
+            }
+            else
+            {
+                magic+=uco-uca;
+            }
+
+            }
+
+        }
+
+    }
+    fout<<maxinr<<" "<<nr;
+    fout<<endl;
+    fout<<pal;
+    fout<<endl;
+    fout<<magic/2;
+}
